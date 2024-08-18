@@ -1,7 +1,7 @@
 
-
+import sys
 lista=[]
-
+print(sys.getsizeof(lista))
 def sumar():
     
     while len(lista) <=2:
@@ -9,4 +9,6 @@ def sumar():
         lista.append(i)
     resultado=sum(lista)
     print(resultado)
+    print(sys.getsizeof(resultado))
+    print(sys.getsizeof(lista))
 sumar()
