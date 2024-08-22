@@ -11,4 +11,5 @@ def sumar():
     print(resultado)
     print(sys.getsizeof(resultado))
     print(sys.getsizeof(lista))
+
 sumar()

@@ -1,9 +1,8 @@
-
 import sys
-b=int(input("Ingrese el número que se tomará como base: "))
-e=int(input("Ingrese el número que se tomará como exponente: "))
-resultado=pow(b,e)
-print(sys.getsizeof(b))
-print(sys.getsizeof(e))
-print(sys.getsizeof(resultado))
+base=int(input("Ingrese el numero que se tomara como base: "))
+exponete=int(input("Ingrese el numero que se tomara como exponente: "))
+resultado=pow(base,exponete)
+print(sys.getsizeof(base))
+print(sys.getsizeof(exponete))
 print(resultado)
+print(sys.getsizeof(resultado))
