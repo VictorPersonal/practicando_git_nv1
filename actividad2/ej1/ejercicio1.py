@@ -1,6 +1,6 @@
 
 class Productos():
-    def __init__(self, nombre, categoria,precioNeto, precioTotal,iva):
+    def __init__(self, nombre, categoria,precioNeto, precioTotal,iva):#5 --> el metodo constructor no se tiene en cuenta haste que se llame un objeto de la clase
         self.nombre=nombre
         self.categoria=categoria
         self.precioN=precioNeto
