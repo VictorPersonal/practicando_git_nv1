@@ -6,26 +6,23 @@ class Votante():
         self.nombre=nombre
         self.edad=edad
         self.sexo=sexo
-    @staticmethod
-    def ingresarAlVotante():
-        lista=[]
+        self.listaVotantes=[]
+
+    def ingresarAlVotante(self):
         for votante in range(4):
             print(f"Votante {votante+1}")
             nombreVotante=input("Ingrese el nombre del votante: ")
             EdadVotante=int(input("Ingrese la edad del votante: "))
             sexo=input("Ingrese el sexo: (Preferiblemente F --> Femenino; M --> Masculino; O --> Otro): ")
             votanteGuardado=Votante(nombreVotante,EdadVotante,sexo)
-            lista.append(votanteGuardado)
+            self.listaVotantes.append(votanteGuardado)
+        return self.listaVotantes
 
-        return lista
-            
-            
-    @staticmethod
-    def selectVotantesPorEdad(lista):
+    def selectVotantesPorEdad(self):
         mayores_a_18_menores_a_20=0
         mayores_20_menores_30=0
         mayores_30=0
-        for votante in lista:
+        for votante in self.listaVotantes:
             if 18<= votante.edad <= 20:
                 mayores_a_18_menores_a_20+=1
             elif 20 < votante.edad <= 30:
@@ -34,13 +31,11 @@ class Votante():
             else:
                 mayores_30+=1
         return mayores_a_18_menores_a_20, mayores_20_menores_30, mayores_30
+    
 
-
-print("Cargando lista....")
-lista_votantes=Votante.ingresarAlVotante()
-
-rango_18_20, rango_21_30, rango_30= Votante.selectVotantesPorEdad(lista_votantes)
-print(f"Resultados\na. Votantes entre 18 y 20 años: {rango_18_20}\nb. Votantes entre 21 y 30 años: {rango_21_30}\nc. Votantes mayores de 30 años: {rango_30}")
+    def mostrarResult(self):
+        rango_18_20, rango_21_30, rango_30= self.selectVotantesPorEdad()
+        print(f"Resultados\na. Votantes entre 18 y 20 años: {rango_18_20}\nb. Votantes entre 21 y 30 años: {rango_21_30}\nc. Votantes mayores de 30 años: {rango_30}")
 
 
 
