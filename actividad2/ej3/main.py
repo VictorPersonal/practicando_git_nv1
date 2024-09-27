@@ -2,8 +2,8 @@ from votantes import Votante
 
 class Main():
     def main():
-        miVotante=Votante("andres",12,"M")
-        opcion=999
+        miVotante=Votante("andres",12,"M")#4+1
+        opcion=999#1
         while opcion != 0:
             print()
             opcion=int(input("Seleccione la opción:\n1. Crear votantes.\n2 .Mostrar resultados.\nIngrese su opción: "))
