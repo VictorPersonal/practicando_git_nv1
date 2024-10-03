@@ -28,5 +28,5 @@ def main():
 def suma(num1, num2):
     return num1+num2#2
     
-main()#22n+11 O(n)=n
+main()#22n+15 O(n)=n
 
