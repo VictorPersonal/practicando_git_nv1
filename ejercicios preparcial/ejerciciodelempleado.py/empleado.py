@@ -1,3 +1,5 @@
+import sys
+
 class Empleado():
     def __init__(self, nombre, cedula, edad, salario):
         self.nombre=nombre
@@ -5,6 +7,7 @@ class Empleado():
         self.edad=edad
         self.__salario=salario
         
+    
     def getSalario(self):
         return self.__salario
     
