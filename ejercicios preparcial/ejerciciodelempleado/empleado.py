@@ -1,7 +1,7 @@
 import sys
 
 class Empleado():
-    def __init__(self, nombre, cedula, edad, salario):
+    def __init__(self, nombre, cedula, edad, salario):#4
         self.nombre=nombre
         self.__cedula=cedula
         self.edad=edad

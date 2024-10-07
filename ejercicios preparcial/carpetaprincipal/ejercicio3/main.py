@@ -13,7 +13,7 @@ class Main():
             
             if opcion == 1:
                 for i in range(10):
-                    miLista.agregar(i * 4)
+                    miLista.agregarFinal(dato=int(input(f"Ingrese el dato # {i+1}: ")))
 
 
                 print("Lista original:")
