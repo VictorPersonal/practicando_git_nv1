@@ -26,7 +26,7 @@ class Main():
         reclamar = ReclamarSubsidio(miLista)#3 --> Pendiente, ELLOS LA HACEN
         opcion = 9999 #1
         while opcion != 0: #n+1 --->> 10n^2+69n+59
-            opcion = int(input("--- MENÚ PRINCIPAL ---\n"
+            opcion = int(input("\n--- MENÚ PRINCIPAL ---\n"
                                "1. Imprimir Lista.\n"
                                "2. Agregar Personas.\n"
                                "3. Reclamar Subsidio.\n"
@@ -37,19 +37,17 @@ class Main():
             if opcion == 1:#1(n+1) --> n+1 --> 5n^2+15n+n+10+1 --> 5n^2+16n+11
 
                 miLista.imprimirLista()#(n+1)(5n+10) --> 5n^2+10n+5n+10 --> 5n^2+15n+10
-                print(f"El peso del objeto de la lista para llamar al metodo imprimir lista es de: {sys.getsizeof(miLista)}")
                 
             elif opcion == 2:#1(n+1) --> n+1 --> 5n^2+16n+11
 
                 for i in range(50):#2n+2 --> (5n+10)(n+1) --> 5n^2+5n+10n+10 --> 5n^2+15n+10
                     agregar.agregarFinalLista(miPersona)#(3n+8)
-                print(f"Peso de la variable miPersona: {sys.getsizeof(miPersona)}")
-                print(f"Peso de la variable agregar: {sys.getsizeof(agregar)}")
+
 
             elif opcion == 3:#1(n+1) --> 21n+n+1+21 --> 22n+22
 
                 reclamar.reclamarSubsidio() #21(n+1)  --> 21n+21           #Colocar la complejidad de la función
-                print(f"Peso de la variable reclamar: {sys.getsizeof(reclamar)}")
+
 
             elif opcion == 4:#1(n+1) --> n+1 --> 2n+n+1+2 --> 3n+3
 
@@ -76,6 +74,6 @@ Main.main()
 #16n+16n+22n+3n+9n+2n+n --> 69n
 #11+11+22+3+9+2+1 --> 59
 
-
+#Complejidades
 #O(n)= 10n^2+69n+59+1+2+3+2+3+1 = O(n)==> 10n^2+69n+71 --> O(n)=n^2
 #S(n)= 2720 bytes

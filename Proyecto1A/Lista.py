@@ -6,7 +6,7 @@ __version__="0.10.1"
 __maintainer__="VISANI"
 __email__="alison.chamorro@correounivalle.edu.co"
 __status__="Prueba"
-import sys
+
 class Lista():
     """Esta clase representa la lista en donde van a ser almacenados los nodos.
         Attributes:

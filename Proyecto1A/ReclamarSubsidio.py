@@ -6,7 +6,6 @@ __version__="0.10.1"
 __maintainer__="VISANI"
 __email__="alison.chamorro@correounivalle.edu.co"
 __status__="Prueba"
-import sys
 class ReclamarSubsidio:
     """Esta clase representa una o varias acciones que realiza cuando una persona reclama un subsidio.
         Attributes:
@@ -66,19 +65,19 @@ class ReclamarSubsidio:
 
         # Elimina el nodo de la cabeza
         self.lista.setCabeza(nodo_a_eliminar.getSiguiente())#2
-        print(f"El peso de la edad obtenida de la persona es de: {sys.getsizeof(persona.edad)}")
+
 
     def contarPersonas(self):#2
         """Este método muestra la cantidad de personas que han reclamado su subsidio.
             Args:
         """
         print(f"La cantidad de personas que han retirado el subsidio es de {self.contador_personas} personas.")#2
-        print(f"El peso del contador de las personas es de: {sys.getsizeof(self.contador_personas)}")
+
 
     def contarDinero(self):#2
         """Este método muestra la cantidad total de dinero entregado en subsidios.
             Args:
         """
         print(f"El total de dinero entregado en subsidios es de {self.contador_dinero} pesos.")#2
-        print(f"El peso del contador del dinero es de: {sys.getsizeof(self.contador_dinero)}")
+
 
