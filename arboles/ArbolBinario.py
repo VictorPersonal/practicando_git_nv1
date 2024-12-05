@@ -91,18 +91,31 @@ class ArbolBinario():
         
 
     def eliminarNodo(self, dato, raiz):
-        nodoEliminar=self.buscarNodo(dato, raiz) 
-        if (nodoEliminar!= None):
-            if (nodoEliminar.getIzq() == None and nodoEliminar.getDer() == None):#Significa q es una hoja
-                #eliminar hoja
-                if (nodoEliminar.getPadre().getDato() >= nodoEliminar.getDato()):
+        if(raiz != None):
+            if(raiz.getDato() == dato):
+                print("El dato {} se encontró en el árbol".format(dato))
+                nodoEliminar = raiz
+                if(nodoEliminar != None):
+                    if(nodoEliminar.getIzq() == None and nodoEliminar.getDer() == None):
+                        #eliminarHoja
+                        if(nodoEliminar.getPadre().getDato() >= nodoEliminar.getDato()):
+                            #izq
+                            nodoEliminar.getPadre().setIzq(None)
+                            print("El dato {} se eliminó del árbol".format(nodoEliminar.getDato()))
+                        else:
+                            #der
+                            nodoEliminar.getPadre().setDer(None)
+                            print("El dato {} se eliminó del árbol".format(nodoEliminar.getDato()))
+                    else:
+                        #eliminarRama
+                        print("El Nodo a eliminar no es una hoja")
+            else:
+                if(raiz.getDato() >= dato):
                     #izq
-                    nodoEliminar.getPadre().setIzq(None)
-                    print("El dato {} se elimino en el arbol".format(nodoEliminar.getDato()))
+                    self.eliminarNodo(dato, raiz.getIzq())
                 else:
                     #der
-                    nodoEliminar.getPadre().setDer(None)
-                    print("El dato {} se elimino en el arbol".format(nodoEliminar.getDato()))
-            else:
-                #eliminar rama
-                pass
+                    self.eliminarNodo(dato, raiz.getDer())
+        else:
+            print("El dato {} NO se encontró en el árbol".format(dato))
+            return None
