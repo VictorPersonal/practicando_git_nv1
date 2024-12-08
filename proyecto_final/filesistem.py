@@ -38,6 +38,7 @@ class FileSystem:
         if nombre == "..":
             if self.directorio_actual.padre: #como self.directorio_actual hace referencia a un nodo entonces se puede acceder los atributos de la clase Nodo como lo es self.padre.
                 self.directorio_actual = self.directorio_actual.padre
+                print("El directorio donde esta ubicado es: {}".format(self.directorio_actual))
             else:
                 print("Ya estás en la raíz.")
             return
@@ -45,7 +46,9 @@ class FileSystem:
         for hijo in self.directorio_actual.hijos:
             if hijo.nombre == nombre and hijo.tipo == "carpeta":
                 self.directorio_actual = hijo
+                print("El directorio donde esta ubicado es: {}".format(self.directorio_actual))#Esto permite ver el directorio actual, opcional
                 return
+                
         print(f"No existe una carpeta llamada {nombre} en el directorio actual.")
 
     def __str__(self):
