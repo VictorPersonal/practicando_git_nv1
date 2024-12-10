@@ -11,7 +11,16 @@ class Nodo:
             raise ValueError("Solo las carpetas pueden tener hijos.")
         for hijo in self.hijos:
             if hijo.nombre == nodo.nombre:
-                raise ValueError(f"Ya existe un elemento llamado {nodo.nombre}.")
+                #Validar si quiere reemplazar al archivo
+                respuesta=input(f"El elemento {nodo.nombre} ya existe. ¿Desea reemplazarlo? (s/n): ").strip().lower()
+                if (respuesta == 's'):#Si lo reemplaza
+                    self.hijos.remove(hijo)#Se borra el anterior y se agrega este.
+                    print(f"El elemento {nodo.nombre} ha sido reemplazado.")
+                else:
+                    #Si la respuesta es NO entonces se conserva el anterior y se borra el que se quizo eliminar
+                    print(f"El elemento {nodo.nombre} no fue reemplazado.")
+                    return #Importante para evitar que el segundo archivo creado, con el mismo nombre se guarde
+                
         self.hijos.append(nodo)
 
 
