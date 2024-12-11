@@ -12,28 +12,33 @@ class FileSystem:
         self.directorio_actual.agregar_hijo(nuevo_nodo)
 
     def listar(self):
+        resultado=[]
         if self.directorio_actual.hijos:
             for hijo in self.directorio_actual.hijos:
-                print(hijo)
+                resultado.append(str(hijo))
         else:
-            print("El directorio actual está vacío.")
+            resultado=["El directorio actual está vacio"]
+
+        return resultado
 
     def eliminar(self, nombre):
-        """
-        Elimina una carpeta o archivo del directorio actual.
-        Si es una carpeta, se eliminarán sus hijos también.
-        :param nombre: Nombre del archivo o carpeta a eliminar.
-        """
-        for hijo in self.directorio_actual.hijos: #como self.directorio_actual hace referencia a un nodo entonces se puede acceder a la lista definida dentro de los atributos de la clase Nodo como lo es self.hijos.
-            if hijo.nombre == nombre:
-                if hijo.tipo == "carpeta" and hijo.hijos:
-                    # Si es una carpeta con hijos, eliminarlos recursivamente
-                    hijo.hijos = []  # Eliminar todos los hijos
-                self.directorio_actual.hijos.remove(hijo)
-                print(f"El nodo {nombre} ha sido eliminado.")
-                return
-        print(f"No se encontró el nodo {nombre} en el directorio actual.")
+            """
+            Elimina una carpeta o archivo del directorio actual.
+            Si es una carpeta, se eliminarán sus hijos también.
+            :param nombre: Nombre del archivo o carpeta a eliminar.
+            """
+            for hijo in self.directorio_actual.hijos:
+                if hijo.nombre == nombre:
+                    if hijo.tipo == "carpeta" and hijo.hijos:
+                        # Si es una carpeta con hijos, eliminarlos recursivamente
+                        hijo.hijos = []  # Eliminar todos los hijos
+                    self.directorio_actual.hijos.remove(hijo)
+                    print(f"El nodo {nombre} ha sido eliminado.")
+                    return
+            print(f"No se encontró el nodo {nombre} en el directorio actual.")
 
+
+    
     def cambiar_directorio(self, nombre):
         if nombre == "..":
             if self.directorio_actual.padre: #como self.directorio_actual hace referencia a un nodo entonces se puede acceder los atributos de la clase Nodo como lo es self.padre.
