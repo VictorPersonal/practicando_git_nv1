@@ -7,40 +7,29 @@ class Nodo:
         self.hijos = [] if tipo == "carpeta" else None
         self.padre = padre
 
-    def agregar_hijo(self, nodo):
-        if self.tipo != "carpeta":
-            raise ValueError("Solo las carpetas pueden tener hijos.")
-        for hijo in self.hijos:
-            if hijo.nombre == nodo.nombre:
-                #Validar si quiere reemplazar al archivo
-                respuesta=input(f"El elemento {nodo.nombre} ya existe. ¿Desea reemplazarlo? (s/n): ").strip().lower()
-                if (respuesta == 's'):#Si lo reemplaza
-                    self.hijos.remove(hijo)#Se borra el anterior y se agrega este.
-                    print(f"El elemento {nodo.nombre} ha sido reemplazado.")
-                else:
-                    #Si la respuesta es NO entonces se conserva el anterior y se borra el que se quizo eliminar
-                    print(f"El elemento {nodo.nombre} no fue reemplazado.")
-                    return #Importante para evitar que el segundo archivo creado, con el mismo nombre se guarde
-                
-        self.hijos.append(nodo)
 
 
     def agregar_hijo_interfaz(self, nodo):
         if self.tipo != "carpeta":
             raise ValueError("Solo las carpetas pueden tener hijos.")
+
         for hijo in self.hijos:
             if hijo.nombre == nodo.nombre:
-                #Validar si quiere reemplazar al archivo
-                respuesta=messagebox.askquestion("Información","¿Desea reemplazarlo?")
-                if (respuesta == 'yes'):#Si lo reemplaza
-                    self.hijos.remove(hijo)#Se borra el anterior y se agrega este.
-                    messagebox.showinfo("Información",f"El elemento {nodo.nombre} ha sido reemplazado.")
+                # Preguntar si desea reemplazarlo
+                respuesta = messagebox.askquestion("Información", "¿Desea reemplazarlo?")
+                if respuesta == 'yes':  # Si acepta reemplazar
+                    self.hijos.remove(hijo)
+                    self.hijos.append(nodo)  # Agrega el nuevo nodo
+                    messagebox.showinfo("Información", f"El elemento {nodo.nombre} ha sido reemplazado.")
+                    return True  # Nodo agregado
                 else:
-                    #Si la respuesta es NO entonces se conserva el anterior y se borra el que se quizo eliminar
-                    messagebox.showinfo("INFORMACIÓN",f"EL ELEMENTO {nodo.nombre} NO FUE REEMPLAZADO.")
-                    return #Importante para evitar que el segundo archivo creado, con el mismo nombre se guarde
-                
+                    # Si no desea reemplazar
+                    messagebox.showinfo("INFORMACIÓN", f"EL ELEMENTO {nodo.nombre} NO FUE REEMPLAZADO.")
+                    return False  # Nodo no agregado
+
+        # Si no hay conflictos, agregar directamente
         self.hijos.append(nodo)
+        return True  # Nodo agregado
 
     def __str__(self):
         return f"{self.nombre} ({self.tipo})"

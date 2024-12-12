@@ -50,10 +50,13 @@ class FileSystemApp(tk.Tk):
             tipo="carpeta"
         else:
             tipo="archivo"
+        
         try:
-            self.fs.crear(name, tipo)
-            self.draw_tree()
-            tk.messagebox.showinfo("Info","Agregado:)")
+            # Intentar agregar el nodo
+            nodo_agregado = self.fs.crear(name, tipo)  # Ahora retorna si el nodo fue agregado
+            if nodo_agregado:
+                self.draw_tree()
+                tk.messagebox.showinfo("Info", "Agregado :)")  # Solo mostrar si fue agregado
         except ValueError as e:
             tk.messagebox.showerror("Error", str(e))
 
@@ -61,12 +64,10 @@ class FileSystemApp(tk.Tk):
         name = self.input_entry.get()  # Obtener el nombre del nodo a eliminar
         try:
             # Intentar eliminar el nodo
-            if self.fs.eliminar(name):  # Verifica si la eliminación fue exitosa
-                self.draw_tree()  # Redibuja el árbol si se elimina correctamente
-                tk.messagebox.showinfo("Éxito", f"'{name}' eliminado correctamente.")
-            else:
-                # Si no se pudo eliminar, mostrar un mensaje de error
-                tk.messagebox.showerror("ERROR IMPORTANTE",f"'{name}' no encontrado para eliminar.")  # Lanza un ValueError para manejar el error
+            self.fs.eliminar(name)  
+            self.draw_tree()  # Redibuja el árbol si se elimina correctamente
+            tk.messagebox.showinfo("Éxito", f"'{name}' eliminado correctamente.")
+            
         except ValueError as e:
             # Captura cualquier ValueError (incluyendo el que hemos lanzado en caso de no encontrar el nodo)
             tk.messagebox.showerror("Error", str(e))
@@ -79,6 +80,7 @@ class FileSystemApp(tk.Tk):
         try:
             self.fs.cambiar_directorio(name)
             self.draw_tree()
+            tk.messagebox.showinfo("Excelente",f"El directorio donde está ubicado es: '{self.fs.directorio_actual.nombre}'")
         except ValueError as e:
             tk.messagebox.showerror("Error", str(e))
 
