@@ -16,8 +16,8 @@ class Main():
             
 
             if (opcion == 1):
-                nombre = input("Ingrese el nombre del archivo o carpeta: ")
-                tipo = input("¿Es un archivo o carpeta? (archivo/carpeta): ")
+                nombre = input("Ingrese el nombre del archivo o carpeta: ").lower()
+                tipo = input("¿Es un archivo o carpeta? (archivo/carpeta): ").lower()
                 fs.crearEnConsola(nombre,tipo)
 
 
@@ -25,7 +25,7 @@ class Main():
                 fs.listarEnConsola()
 
             elif (opcion == 3):
-                nombre = input("Ingrese el nombre del directorio al que desea acceder o '..' para volver al padre: ")
+                nombre = input("Ingrese el nombre del directorio al que desea acceder o '..' para volver al padre: ").lower()
                 fs.cambiar_directorio(nombre)
 
             elif (opcion == 4):

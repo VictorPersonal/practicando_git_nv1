@@ -36,6 +36,9 @@ class FileSystemApp(tk.Tk):
         self.change_button.grid(row=1, column=2, padx=5, pady=5)
         self.list_button = tk.Button(self.controls_frame, text="Listar", command=self.list_directory)
         self.list_button.grid(row=1, column=3, padx=5, pady=5)
+        self.search_button=tk.Button(self.controls_frame, text="Buscar", command=self.search)
+        self.search_button.grid(row=1, column=4, padx=5, pady=5)
+        
 
         # Dibujar el árbol inicial
         self.draw_tree()
@@ -50,6 +53,7 @@ class FileSystemApp(tk.Tk):
         try:
             self.fs.crear(name, tipo)
             self.draw_tree()
+            tk.messagebox.showinfo("Info","Agregado:)")
         except ValueError as e:
             tk.messagebox.showerror("Error", str(e))
 
@@ -62,7 +66,7 @@ class FileSystemApp(tk.Tk):
                 tk.messagebox.showinfo("Éxito", f"'{name}' eliminado correctamente.")
             else:
                 # Si no se pudo eliminar, mostrar un mensaje de error
-                raise ValueError(f"'{name}' no encontrado para eliminar.")  # Lanza un ValueError para manejar el error
+                tk.messagebox.showerror("ERROR IMPORTANTE",f"'{name}' no encontrado para eliminar.")  # Lanza un ValueError para manejar el error
         except ValueError as e:
             # Captura cualquier ValueError (incluyendo el que hemos lanzado en caso de no encontrar el nodo)
             tk.messagebox.showerror("Error", str(e))
@@ -80,12 +84,54 @@ class FileSystemApp(tk.Tk):
 
     def list_directory(self):
         try:
+
             resultados = self.fs.listar()
-            self.output_text = '\n'.join(resultados)
-            self.canvas.delete("all")  # Limpiar el canvas antes de mostrar el nuevo texto
-            self.canvas.create_text(10, 10, text=self.output_text, anchor="nw", font=("Arial", 10))
+
+            ventana_mostrar_resultados=tk.Toplevel(self)
+            ventana_mostrar_resultados.title("Aquí verás la informacion que contiene el directorio actual")
+            ventana_mostrar_resultados.geometry("400x300")
+            texto=tk.Text(ventana_mostrar_resultados)
+            texto.grid(row=0, column=0)
+
+            texto.insert(tk.END, resultados + "\n")
+
+            texto.config(state="disabled")
+
+
         except Exception as e:
             tk.messagebox.showerror("Error", str(e))
+
+
+    def search(self):
+        ventana_buscar=tk.Toplevel(self)
+        ventana_buscar.title("Buscar nodo")
+        ventana_buscar.geometry("400x200")
+        lblBuscar=tk.Label(ventana_buscar,text="Ingrese el nodo a buscar: ")
+        lblBuscar.grid(row=0, column=0)
+        txtBuscar=tk.Entry(ventana_buscar)
+        txtBuscar.grid(row=0, column=1)
+        area_resultado_esperado= tk.Text(ventana_buscar,state="disabled")
+        area_resultado_esperado.grid(row=1,column=1)
+        
+        
+        def buscar_nodo():
+            nombre=txtBuscar.get()
+            if not nombre.strip():
+                tk.messagebox.showwarring("Advertencia","Debe ingresar un nombre para buscar")
+                return
+            resultado=fs.buscar(nombre)
+            area_resultado_esperado.config(state="normal")
+            area_resultado_esperado.delete(1.0,tk.END)
+            if resultado:
+                area_resultado_esperado.insert(tk.END, f"Se encontró el nodo:\n{str(resultado)}")
+            else:
+                area_resultado_esperado.insert(tk.END,"No se encontró ningun nodo con ese nombre")
+            area_resultado_esperado.config(state="disabled")
+        btnBuscar=tk.Button(ventana_buscar, text="Buscar", command=buscar_nodo)
+        btnBuscar.grid(row=2,column=0)
+
+        
+
 
 
     def draw_tree(self):
